@@ -5,15 +5,49 @@ import com.mastery.java.task.entity.Employee;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The interface {@code EmployeeService} describes operations(CRUD) with {@link Employee}
+ *
+ * @author Roman Aleksandrov
+ * @version 1.0
+ */
 public interface EmployeeService {
 
+    /**
+     * Get employees list
+     *
+     * @return {@link List} of employees
+     */
     List<Employee> findAllEmployee();
 
+    /**
+     * Save employee
+     *
+     * @param employee {@link Employee}
+     */
     void saveEmployee(Employee employee);
 
+    /**
+     * Get employee by id
+     *
+     * @param id the current employee id
+     * @return {@link List} of employees
+     */
     Optional<Employee> getEmployeeById(Integer id);
 
-    void  updateById(Employee employee, Integer id);
+    /**
+     * Update employee by id
+     *
+     * @param employee {@link Employee}
+     * @param id       the current employee id
+     */
+    void updateById(Employee employee, Integer id);
 
-    void removeEmployeeById(Integer id);
+    /**
+     * Delete employee
+     *
+     * @param id the current employee id
+     * @return result of deleting
+     */
+    boolean removeEmployeeById(Integer id);
 }
