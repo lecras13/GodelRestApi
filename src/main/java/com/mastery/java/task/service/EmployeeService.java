@@ -3,7 +3,6 @@ package com.mastery.java.task.service;
 import com.mastery.java.task.entity.Employee;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The interface {@code EmployeeService} describes operations(CRUD) with {@link Employee}
@@ -33,7 +32,7 @@ public interface EmployeeService {
      * @param id the current employee id
      * @return {@link List} of employees
      */
-    Optional<Employee> getEmployeeById(Integer id);
+    Employee getEmployeeById(Integer id);
 
     /**
      * Update employee by id
@@ -47,7 +46,10 @@ public interface EmployeeService {
      * Delete employee
      *
      * @param id the current employee id
-     * @return result of deleting
      */
-    boolean removeEmployeeById(Integer id);
+    void removeEmployeeById(Integer id);
+
+
+
+    List<Employee> getByName(String name);
 }
