@@ -3,8 +3,10 @@ package com.mastery.java.task.service;
 import com.mastery.java.task.entity.Employee;
 import com.mastery.java.task.exception.EmployeeNotFoundException;
 import com.mastery.java.task.repository.EmployeeRepository;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -17,12 +19,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAllEmployee() {
+    public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
     @Override
-    public Employee getEmployeeById(Integer id) {
+    public Employee getById(Integer id) {
         return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException("Such id = " + id + " not found!"));
     }
 
@@ -33,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public void saveEmployee(Employee employee) {
+    public void save(Employee employee) {
         employeeRepository.save(employee);
     }
 
@@ -48,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public void removeEmployeeById(Integer id) {
+    public void removeById(Integer id) {
         employeeRepository.deleteById(id);
     }
 }

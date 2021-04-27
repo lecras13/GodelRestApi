@@ -17,14 +17,14 @@ public interface EmployeeService {
      *
      * @return {@link List} of employees
      */
-    List<Employee> findAllEmployee();
+    List<Employee> findAll();
 
     /**
      * Save employee
      *
      * @param employee {@link Employee}
      */
-    void saveEmployee(Employee employee);
+    void save(Employee employee);
 
     /**
      * Get employee by id
@@ -32,7 +32,7 @@ public interface EmployeeService {
      * @param id the current employee id
      * @return {@link List} of employees
      */
-    Employee getEmployeeById(Integer id);
+    Employee getById(Integer id);
 
     /**
      * Update employee by id
@@ -47,7 +47,7 @@ public interface EmployeeService {
      *
      * @param id the current employee id
      */
-    void removeEmployeeById(Integer id);
+    void removeById(Integer id);
 
 
 

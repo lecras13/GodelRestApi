@@ -2,27 +2,26 @@ package com.mastery.java.task.rest;
 
 import com.mastery.java.task.entity.Employee;
 import com.mastery.java.task.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+
+@RestController()
 @RequestMapping("/api/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @Autowired
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-    @GetMapping()
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        return ResponseEntity.ok(employeeService.findAllEmployee());
+    @GetMapping
+    public ResponseEntity<List<Employee>> getAll() {
+        return ResponseEntity.ok(employeeService.findAll());
     }
 
     @GetMapping("/employee")
@@ -31,25 +30,25 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable final Integer id) {
-        return ResponseEntity.ok(employeeService.getEmployeeById(id));
+    public ResponseEntity<Employee> getById(@PathVariable final Integer id) {
+        return ResponseEntity.ok(employeeService.getById(id));
     }
 
-    @PostMapping()
-    public ResponseEntity<Employee> addEmployee(@RequestBody final Employee employee) {
-        employeeService.saveEmployee(employee);
+    @PostMapping
+    public ResponseEntity<Employee> add(@RequestBody final Employee employee) {
+        employeeService.save(employee);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployeeById(@RequestBody final Employee employee, @PathVariable final Integer id) {
+    public ResponseEntity<Employee> updateById(@RequestBody final Employee employee, @PathVariable final Integer id) {
         employeeService.updateById(employee, id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Employee> deleteEmployeeById(@PathVariable  final Integer id) {
-        employeeService.removeEmployeeById(id);
+    public ResponseEntity<Employee> deleteById(@PathVariable  final Integer id) {
+        employeeService.removeById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
