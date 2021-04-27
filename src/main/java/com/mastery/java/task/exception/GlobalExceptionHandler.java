@@ -25,8 +25,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleException(EmployeeNotFoundException exception) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();
         exceptionResponse.setExceptionMessage(exception.getMessage());
-        logger.warn("Example log from {}", exception.getMessage());
+        logger.warn("Exception message: {}", exception.getMessage());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
-
 }

@@ -1,6 +1,11 @@
 package com.mastery.java.task.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -10,25 +15,40 @@ public class Employee {
     @Id
     @Column(name = "employee_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "The database generated employee ID")
     private Integer employeeId;
 
+    @NotBlank(message = "Name is mandatory")
     @Column(name = "first_name")
+    @ApiModelProperty(notes = "The employee first name")
     private String firstName;
 
+    @NotBlank(message = "Name is mandatory")
     @Column(name = "last_name")
+    @ApiModelProperty(notes = "The employee last name")
     private String lastName;
 
+    @NotBlank(message = "Name is mandatory")
     @Column(name = "department_id")
+    @ApiModelProperty(notes = "The department ID")
     private Long departmentId;
 
+    @NotBlank(message = "Name is mandatory")
     @Column(name = "job_title")
+    @ApiModelProperty(notes = "The title of job employee")
     private String jobTitle;
+
+    //todo
+  /*  @NotNull
+    (value= Gender.class)*/
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
+    @ApiModelProperty(notes = "The gender employee")
     private Gender gender;
 
     @Column(name = "date_of_birth")
+    @ApiModelProperty(notes = "The date of birth employee")
     private LocalDate dateOfBirth;
 
     public Employee() {

@@ -3,10 +3,8 @@ package com.mastery.java.task.service;
 import com.mastery.java.task.entity.Employee;
 import com.mastery.java.task.exception.EmployeeNotFoundException;
 import com.mastery.java.task.repository.EmployeeRepository;
-import io.swagger.annotations.Api;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
