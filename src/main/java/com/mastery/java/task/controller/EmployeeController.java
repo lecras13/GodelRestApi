@@ -2,10 +2,13 @@ package com.mastery.java.task.controller;
 
 import com.mastery.java.task.entity.Employee;
 import com.mastery.java.task.service.EmployeeService;
+import com.mastery.java.task.validation.EmployeeValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.hibernate.annotations.Parameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,12 +17,13 @@ import java.util.List;
 @RestController()
 @RequestMapping("/api/employees")
 @Api(value = "CRUD operations with  employees database")
-
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final EmployeeValidator employeeValidator;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, EmployeeValidator employeeValidator) {
         this.employeeService = employeeService;
+        this.employeeValidator = employeeValidator;
     }
 
     @ApiOperation(value = "Get list employees", response = ResponseEntity.class)
@@ -42,16 +46,21 @@ public class EmployeeController {
 
     @ApiOperation(value = "Add new employee", response = ResponseEntity.class)
     @PostMapping(produces = "application/json")
-    public ResponseEntity<Employee> add(@Valid @RequestBody final Employee employee) {
-        employeeService.save(employee);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<Employee> add(@Valid @RequestBody final Employee employee, BindingResult bindingResult) {
+        employeeValidator.validate(employee, bindingResult);
+        if (!bindingResult.hasErrors()) {
+            employeeService.save(employee);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @ApiOperation(value = "Update employee with required id", response = ResponseEntity.class)
     @PutMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Employee> updateById(@Valid @RequestBody final Employee employee, @PathVariable final Integer id) {
+    public ResponseEntity<Employee> updateById(@Valid @RequestBody final Employee employee, BindingResult bindingResult, @PathVariable final Integer id) {
         employeeService.updateById(employee, id);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ApiOperation(value = "Delete employee by id", response = ResponseEntity.class)
