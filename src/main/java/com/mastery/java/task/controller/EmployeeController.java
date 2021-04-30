@@ -2,7 +2,6 @@ package com.mastery.java.task.controller;
 
 import com.mastery.java.task.entity.Employee;
 import com.mastery.java.task.service.EmployeeService;
-import com.mastery.java.task.validation.EmployeeValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -20,7 +19,7 @@ import java.util.List;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService, EmployeeValidator employeeValidator) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
