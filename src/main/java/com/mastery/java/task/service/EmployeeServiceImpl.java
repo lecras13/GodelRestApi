@@ -27,8 +27,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getByName(String name) {
-        return employeeRepository.getByFirstName(name);
+    public List<Employee> getByNames(String firstName, String lastName) {
+        if (lastName == null) {
+            return employeeRepository.getByFirstName(firstName);
+        }
+        return employeeRepository.getByFirstNameAndLastName(firstName, lastName);
     }
 
     @Transactional

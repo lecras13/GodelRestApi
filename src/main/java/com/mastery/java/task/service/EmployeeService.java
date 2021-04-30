@@ -17,5 +17,5 @@ public interface EmployeeService {
 
     void removeById(Integer id);
 
-    List<Employee> getByName(String name);
+    List<Employee> getByNames(String firstName , String lastName);
 }

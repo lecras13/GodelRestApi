@@ -8,5 +8,9 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    List<Employee> getByFirstName(String name);
+
+    List<Employee> getByFirstName(String firstName);
+
+    List<Employee> getByFirstNameAndLastName(String firstName, String lastName);
+
 }
