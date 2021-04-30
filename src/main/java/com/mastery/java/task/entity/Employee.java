@@ -1,6 +1,8 @@
 package com.mastery.java.task.entity;
 
+import com.mastery.java.task.validation.PersonAgeConstraint;
 import io.swagger.annotations.ApiModelProperty;
+import jdk.jfr.Period;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,13 +19,13 @@ public class Employee {
     @ApiModelProperty(notes = "The database generated employee ID")
     private Integer employeeId;
 
-    @NotBlank(message = "First name is mandatory")
     @Column(name = "first_name")
+    @NotBlank(message = "First name is mandatory")
     @ApiModelProperty(notes = "The employee first name")
     private String firstName;
 
-    @NotBlank(message = "Last name is mandatory")
     @Column(name = "last_name")
+    @NotBlank(message = "Last name is mandatory")
     @ApiModelProperty(notes = "The employee last name")
     private String lastName;
 
@@ -42,6 +44,7 @@ public class Employee {
     private Gender gender;
 
     @Column(name = "date_of_birth")
+    @PersonAgeConstraint
     @ApiModelProperty(notes = "The date of birth employee")
     private LocalDate dateOfBirth;
 

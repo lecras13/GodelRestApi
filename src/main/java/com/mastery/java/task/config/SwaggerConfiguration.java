@@ -22,7 +22,8 @@ public class SwaggerConfiguration {
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
-                .build().apiInfo(metaInfo());
+                .build().apiInfo(metaInfo())
+                .useDefaultResponseMessages(false);
     }
 
     private ApiInfo metaInfo() {

@@ -5,68 +5,72 @@ import com.mastery.java.task.service.EmployeeService;
 import com.mastery.java.task.validation.EmployeeValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.hibernate.annotations.Parameter;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController()
+@RestController
 @RequestMapping("/api/employees")
 @Api(value = "CRUD operations with  employees database")
 public class EmployeeController {
     private final EmployeeService employeeService;
-    private final EmployeeValidator employeeValidator;
 
     public EmployeeController(EmployeeService employeeService, EmployeeValidator employeeValidator) {
         this.employeeService = employeeService;
-        this.employeeValidator = employeeValidator;
     }
 
-    @ApiOperation(value = "Get list employees", response = ResponseEntity.class)
     @GetMapping(produces = "application/json")
-    public ResponseEntity<List<Employee>> getAll() {
-        return ResponseEntity.ok(employeeService.findAll());
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Get list employees", response = ResponseEntity.class)
+    @ApiResponse(code = 200, message = "Successful retrieval of employees list", response = Employee.class)
+    public List<Employee> getAll() {
+        return employeeService.findAll();
     }
 
-    @ApiOperation(value = "Get employees by first name", response = ResponseEntity.class)
     @GetMapping(value = "/employee", produces = "application/json")
-    public ResponseEntity<List<Employee>> getByName(@RequestParam("name") final String name) {
-        return ResponseEntity.ok(employeeService.getByName(name));
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Get employees by first name", response = ResponseEntity.class)
+    @ApiResponse(code = 200, message = "Successful retrieval of employees by name", response = Employee.class)
+    public List<Employee> getByName(@RequestParam("name") final String name) {
+        return employeeService.getByName(name);
     }
 
-    @ApiOperation(value = "Get employee by id", response = ResponseEntity.class)
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Employee> getById(@PathVariable final Integer id) {
-        return ResponseEntity.ok(employeeService.getById(id));
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Get employee by id", response = ResponseEntity.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of employee detail", response = Employee.class),
+            @ApiResponse(code = 404, message = "Employee does not exist")})
+    public Employee getById(@PathVariable final Integer id) {
+        return employeeService.getById(id);
     }
 
-    @ApiOperation(value = "Add new employee", response = ResponseEntity.class)
     @PostMapping(produces = "application/json")
-    public ResponseEntity<Employee> add(@Valid @RequestBody final Employee employee, BindingResult bindingResult) {
-        employeeValidator.validate(employee, bindingResult);
-        if (!bindingResult.hasErrors()) {
-            employeeService.save(employee);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "Add new employee", response = ResponseEntity.class)
+    @ApiResponse(code = 201, message = "Successful save employees", response = Employee.class)
+    public void add(@Valid @RequestBody final Employee employee) {
+        employeeService.save(employee);
     }
 
-    @ApiOperation(value = "Update employee with required id", response = ResponseEntity.class)
     @PutMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Employee> updateById(@Valid @RequestBody final Employee employee, BindingResult bindingResult, @PathVariable final Integer id) {
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Update employee with required id", response = ResponseEntity.class)
+    @ApiResponse(code = 200, message = "Successfully change employees", response = Employee.class)
+    public void updateById(@Valid @RequestBody final Employee employee, @PathVariable final Integer id) {
         employeeService.updateById(employee, id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Delete employee by id", response = ResponseEntity.class)
     @DeleteMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Employee> deleteById(@PathVariable final Integer id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation(value = "Delete employee by id", response = ResponseEntity.class)
+    @ApiResponse(code = 200, message = "Successful delete employee", response = Employee.class)
+    public void deleteById(@PathVariable final Integer id) {
         employeeService.removeById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
