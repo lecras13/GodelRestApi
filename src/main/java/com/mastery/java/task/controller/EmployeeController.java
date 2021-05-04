@@ -52,7 +52,7 @@ public class EmployeeController {
     @PostMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Add new employee")
-    @ApiResponse(code = 201, message = "Successful save employees", response = Employee.class)
+    @ApiResponse(code = 201, message = "Successful save employees")
     public void add(@Valid @RequestBody final Employee employee) {
         employeeService.save(employee);
     }
@@ -61,7 +61,7 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Update employee with required id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully change employees", response = Employee.class),
+            @ApiResponse(code = 200, message = "Successfully change employees"),
             @ApiResponse(code = 404, message = "Employee does not exist")})
     public void updateById(@Valid @RequestBody final Employee employee, @PathVariable final Integer id) {
         employeeService.updateById(employee, id);
@@ -70,7 +70,7 @@ public class EmployeeController {
     @DeleteMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Delete employee by id")
-    @ApiResponse(code = 200, message = "Successful delete employee", response = Employee.class)
+    @ApiResponse(code = 200, message = "Successful delete employee")
     public void deleteById(@PathVariable final Integer id) {
         employeeService.removeById(id);
     }

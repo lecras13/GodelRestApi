@@ -4,7 +4,6 @@ public class ExceptionResponse {
     private String exceptionMessage;
 
     public ExceptionResponse() {
-
     }
 
     public String getExceptionMessage() {

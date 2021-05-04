@@ -7,7 +7,6 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 
-/*
 @Configuration
 @EnableJms
 public class JMSConfig {
@@ -38,5 +37,4 @@ public class JMSConfig {
         factory.setConcurrency("1-1");
         return factory;
     }
-
-}*/
+}
