@@ -35,7 +35,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.getByFirstNameAndLastName(firstName, lastName);
     }
 
-    @Transactional
     @Override
     public void save(Employee employee) {
         employeeRepository.save(employee);
@@ -50,7 +49,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
-    @Transactional
     @Override
     public void removeById(Integer id) {
         employeeRepository.deleteById(id);
