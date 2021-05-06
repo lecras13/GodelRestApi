@@ -49,13 +49,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.30</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.30</version>
         </dependency>
 
         <dependency>
@@ -116,9 +109,10 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.3.5</version>
                 <configuration>
-                    <propertyFile>src/main/resources/application.properties</propertyFile>
-                    <propertyFileWillOverride>true</propertyFileWillOverride>
+                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
+                    <changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
                 </configuration>
             </plugin>
         </plugins>
