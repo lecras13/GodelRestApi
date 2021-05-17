@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  app:
+    container_name: rest-api
+    image: server
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresqldb
+      - activmq
+  postgresqldb:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=employeesdb
+  activmq:
+    image: rmohr/activemq:5.15.9
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    environment:
+      - ACTIVEMQ_ADMIN_LOGIN=admin
+      - ACTIVEMQ_ADMIN_PASSWORD=admin

@@ -13,7 +13,7 @@ import org.springframework.jms.support.converter.MessageType;
 @Configuration
 @EnableJms
 public class JMSConfig {
-    String BROKER_URL = "tcp://localhost:61616";
+    String BROKER_URL = "vm://localhost:61616";
     String BROKER_USERNAME = "admin";
     String BROKER_PASSWORD = "admin";
 
