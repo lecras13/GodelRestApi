@@ -39,6 +39,17 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+
+       <!--__________________________HATEOUAS-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        <!--__________________________HATEOUAS-->
+
+
+
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>

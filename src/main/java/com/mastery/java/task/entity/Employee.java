@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.mastery.java.task.validation.PersonAgeConstraint;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.hateoas.RepresentationModel;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,7 +18,8 @@ import java.util.Objects;
 
 @Entity
 @Table
-public class Employee {
+public class Employee extends RepresentationModel<Employee> {
+
 
     @Id
     @Column(name = "employee_id")
@@ -53,7 +54,7 @@ public class Employee {
     @Column(name = "date_of_birth")
     @PersonAgeConstraint
     @ApiModelProperty(notes = "The date of birth employee")
-    @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
